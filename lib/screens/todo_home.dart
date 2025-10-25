@@ -56,8 +56,8 @@ class _TodoHomePageState extends State<TodoHomePage> {
                         onDismissed: (_) => _removeItem(index),
                         background: Container(
                           color: Colors.red,
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.only(left: 16.0),
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.only(right: 16.0),
                           child: const Icon(Icons.delete, color: Colors.white),
                         ),
                         child: CheckboxListTile(
