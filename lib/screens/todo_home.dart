@@ -12,13 +12,15 @@ class TodoHomePage extends StatefulWidget {
 class _TodoHomePageState extends State<TodoHomePage> {
   final List<TodoItem> _items = [];
   final TextEditingController _controller = TextEditingController();
+  int _nextId = 0;
 
   void _addItem() {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
 
     setState(() {
-      _items.insert(0, TodoItem(title: text));
+      _items.insert(0, TodoItem(id: _nextId, title: text));
+      _nextId++;
     });
     _controller.clear();
   }
