@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/todo_item.dart';
 import '../widgets/todo_input_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert'; 
 
 class TodoHomePage extends StatefulWidget {
   const TodoHomePage({super.key});
@@ -14,6 +16,33 @@ class _TodoHomePageState extends State<TodoHomePage> {
   final TextEditingController _controller = TextEditingController();
   int _nextId = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _loadItems(); // 앱 시작 시 데이터 불러오기
+  }
+
+  Future<void> _saveItems() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonList = _items.map((item) => item.toJson()).toList();
+    await prefs.setString('todo_items', jsonEncode(jsonList));
+  }
+
+  Future<void> _loadItems() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString('todo_items');
+    if (jsonString != null) {
+      final List decoded = jsonDecode(jsonString);
+      setState(() {
+        _items.clear();
+        _items.addAll(decoded.map((e) => TodoItem.fromJson(e)));
+        _nextId = _items.isEmpty
+            ? 0
+            : _items.map((e) => e.id).reduce((a, b) => a > b ? a : b) + 1;
+      });
+    }
+  }
+
   void _addItem() {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
@@ -23,18 +52,21 @@ class _TodoHomePageState extends State<TodoHomePage> {
       _nextId++;
     });
     _controller.clear();
+    _saveItems(); // 변경 후 저장
   }
 
   void _toggleDone(int index) {
     setState(() {
       _items[index].done = !_items[index].done;
     });
+    _saveItems(); // 변경 후 저장
   }
 
   void _removeItem(int index) {
     setState(() {
       _items.removeAt(index);
     });
+    _saveItems(); // 변경 후 저장
   }
 
   @override

@@ -8,4 +8,16 @@ class TodoItem {
     required this.title,
     this.done = false,
   });
+
+    Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'done': done,
+  };
+
+  factory TodoItem.fromJson(Map<String, dynamic> json) => TodoItem(
+    id: json['id'],
+    title: json['title'],
+    done: json['done'],
+  );
 }
