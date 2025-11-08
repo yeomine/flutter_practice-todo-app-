@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "40843384061",
+    "project_id": "todoapp-yeomnin",
+    "storage_bucket": "todoapp-yeomnin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40843384061:android:193512152d2b89190c1a94",
+        "android_client_info": {
+          "package_name": "com.example.my_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClpp0YIZ1pf0XU9OSoZR__PWWljChfNgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
