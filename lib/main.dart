@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Todo App(Test)',
+      title: 'Todo App(Firebase 연결 완료!!)',
       theme: ThemeData(colorSchemeSeed: Colors.black),
       home: const TodoHomePage(),
     );
